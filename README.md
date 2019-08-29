@@ -5,9 +5,11 @@
 
 ## Overview
 
-This is the repository for GEOG 365, Introduction to GIS Programming, during 2019 Fall semester at Penn State.
+Welcome to the repository for GEOG 365, Introduction to GIS Programming, during 2019 Fall semester at Penn State.
 
-Don't have your machine already set up? Use a pre-built machine dedicated for this course at [Binder](https://mybinder.org/v2/gh/Weiming-Hu/PSU-2019FALL-GEOG365-GISIntroR/master), or click the `Binder` badge above.
+Instructor: [Weiming Hu](https://weiming-hu.github.io/)
+
+Didn't have your machine already set up? Use a pre-built machine dedicated for this course at [Binder](https://mybinder.org/v2/gh/Weiming-Hu/PSU-2019FALL-GEOG365-GISIntroR/master), or click the `Binder` badge above.
 
 ## Issues
 
