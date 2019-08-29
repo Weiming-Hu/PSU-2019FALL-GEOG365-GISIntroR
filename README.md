@@ -9,7 +9,7 @@ Welcome to the repository for GEOG 365, Introduction to GIS Programming, during 
 
 Instructor: [Weiming Hu](https://weiming-hu.github.io/)
 
-Didn't have your machine already set up? Use a pre-built machine dedicated for this course at [Binder](https://mybinder.org/v2/gh/Weiming-Hu/PSU-2019FALL-GEOG365-GISIntroR/master), or click the `Binder` badge above.
+Didn't have your machine already set up? Use a pre-built machine dedicated for this course at [Binder](https://mybinder.org/v2/gh/Weiming-Hu/PSU-2019FALL-GEOG365-GISIntroR/master), or click the `Launch | Binder` badge above.
 
 ## Issues
 
