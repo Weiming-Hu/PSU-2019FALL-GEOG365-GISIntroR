@@ -15,7 +15,7 @@ Didn't have your machine already set up? Use a pre-built machine dedicated for t
 
 This document walks you through the steps to set up your environment for GEOG 365, Introduction to GIS Programming.
 
-### Increase Your Storage Space
+### Increase Your Storage Space (For Penn State Students)
 
 If you are using the lab desktops, you might run into issues on insufficient storage space if you are trying install packages. This is because you are initially given 500 MB of online storage space; however, you may increase your storage allocations to 10GB. More information can be found [here](https://sites.comm.psu.edu/itsupport/pass-space-u-drive/).
 
