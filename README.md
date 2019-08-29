@@ -4,6 +4,19 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Weiming-Hu/PSU-2019FALL-GEOG365-GISIntroR/master)
 
+<!-- vim-markdown-toc GitLab -->
+
+* [Overview](#overview)
+* [Setup Instructions](#setup-instructions)
+    * [Increase Your Storage Space (For Penn State Students)](#increase-your-storage-space-for-penn-state-students)
+    * [Install R and RStudio](#install-r-and-rstudio)
+    * [Install LaTex](#install-latex)
+    * [Install GIT](#install-git)
+    * [Working with Markdown](#working-with-markdown)
+* [Issues](#issues)
+
+<!-- vim-markdown-toc -->
+
 ## Overview
 
 Welcome to the repository for GEOG 365, Introduction to GIS Programming, during 2019 Fall semester at Penn State.
