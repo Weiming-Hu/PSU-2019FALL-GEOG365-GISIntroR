@@ -1,0 +1,328 @@
+---
+title: "R Basics 1"
+author: "Weiming Hu"
+date: "August 29, 2019"
+output: pdf_document
+---
+
+## Topics
+
+Below is a summary of the topics covered in this lecture:
+
+- Constants
+	- Numbers
+	- Characters
+	- Symbols
+- Operators
+	- Types
+	- Orders
+- Objects and Data Access
+	- Vectors
+	- Matrices
+	- Data Frames
+	- Lists
+	- Date and Time
+- Attributes
+
+## Constants
+
+Constants are the basic building blocks for data objects in R, which include numbers, character values, and symbols.
+
+### Numeric Vectors
+
+R provides multiple ways to specify numbers.
+
+```{r}
+# Assign a number to a variable
+a <- 1.1
+
+# Examine the type of the variable.
+# By default, numbers in R are interpreted as
+# double-precision numbers.
+#
+typeof(a)
+
+# Q: What if you assign an integer? What is the type?
+
+# Put multiple numbers in the same vector
+b <- c(1, 2.4, 1e-2, 0xA, 5:7)
+
+# Examine the content of the a vector
+print(b)
+
+# Q: Why does 5:7 becomes 5.00, 6.00, 7.00
+```
+
+R allows a lot of flexibility when entering numbers. However, **there is a limit to the size and precision of numbers that R can represent**.
+
+```{r}
+# The limit of precision
+2^1023 + 1 == 2^1023
+
+# The limit of size
+2^1024
+```
+
+### Character Vectors
+
+A character object contains all the text between a pair of single or double quotes. **R does not distinguish single and double quotes as long as they are consistent**.
+
+```{r}
+c <- c('Penn', "State")
+print(c)
+```
+
+### Symbols
+
+A symbol is the name of a variable in R. We can assign different values to the same symbol. Symbols:
+
+- are case sensitive;
+- generally start with a character and then other symbols;
+- may contain speicial symbols like `.` and `_`;
+
+## Operators
+
+Here is a partial list of the supported operators in R. These operators are very common in R and some of them can be very confusing. But once you have fully grasped what they are doing, they become very convenient.
+
+| Operator |    Type    |        Description       |
+|:--------:|:----------:|:------------------------:|
+| `^`      | Arithmetic | Exponent                 |
+| `%%`     | Arithmetic | Modulus                  |
+| `==`     | Relational | Equal to                 |
+| `!=`     | Relational | Not equal to             |
+| `!`      | Logical    | Logical NOT              |
+| `&`      | Logical    | Element-wise logical AND |
+| `&&`     | Logical    | Logical AND              |
+| `|`      | Logical    | Element-wise logical OR  |
+| `||`     | Logical    | Logical OR               |
+| `<-`     | Assignment | Leftwards assignment     |
+
+*Table generated using [Tables Generator](https://tablesgenerator.com/markdown_tables)*.
+
+Try to anticipate the results or the output messages of the following expressions and then run the command to validate your answers.
+
+```{r, results=F}
+# Comparing different objects
+TRUE == 1
+
+# Element-wise logical operation
+0:2 & T
+
+# Logical operation
+0:2 && T
+```
+
+Orders of operators are also important. Most of the time, you can use expect their behaviors by intuition. But there are cases that intuition might not work. Try to anticipate the results or the output messages of the following expressions and then run the command to validate your answers.
+
+```{r, results=F}
+! 1 == 2
+
+(! 1) == 2
+
+3 < 4 & 5
+
+3 < (4 & 5)
+```
+
+## Objects and Data Access
+
+### Vectors
+
+Vector is a basic data structure in R. It contains element of **the same type**. The data types can be logical, integer, double, character, complex or raw. A vector's type can be checked with the `typeof()` function.
+
+Another important property of a vector is its length. This is the number of elements in the vector and can be checked with the function `length()`.
+
+The following code block shows some common operations on vectors.
+
+```{r, results=F}
+# Create vectors
+a <- c(1, 4, 5)
+b <- 1:5
+c <- seq(from = -1, to = 2, by = 0.5)
+d <- c('Bob' = 95, 'Tom' = 100)
+
+# Access vector values
+a[2]
+b[2:3]
+c[c(1, 3)]
+c[c(1.2, 3.9)]
+d['Bob']
+a[-1]
+a[c(T, T, F)]
+c[c <= 0]
+
+# Q: By comparing the last two examples, can you
+# guess why using logical vector as index would work?
+#
+# Q: What if you are indexing a value that does not exist?
+# What error message would you get? What do you think
+# of the way R handles the situation?
+```
+
+### Matrices
+
+A matrix is a collection of data elements arranged in a **two-dimensional rectangular** layout.
+
+The following code block shows some common operations on matricex.
+
+```{r, results=F}
+# Create a matrix
+mat <- matrix(1:10, nrow = 2, byrow = F)
+
+# Examine the shape of the matrix
+dim(mat)
+
+# Examine the values
+print(mat)
+
+# Access data values
+mat[1, 2]
+mat[2, c(2, 5)]
+mat[, c(3, 5)]
+
+# Transpose the matrix
+t(mat)
+
+# Coerce the matrix into a vector
+# Again, please anticipate the result before you run the code.
+#
+as.vector(mat)
+```
+
+### Data Frames
+
+A data frame is a two-dimensional structure in which each column contains values of one variable and each row contains one set of values from each column. In other words, a data frame has variables by columns and records/observations by rows.
+
+Following are the characteristics of a data frame.
+
+- The column names should be non-empty.
+- The row names should be unique.
+- The data stored in a data frame can be of numeric, factor or character type.
+- Each column should contain same number of data items.
+
+```{r, results=F}
+# Create the data frame.
+emp.data <- data.frame(
+   emp_id = c (1:5), 
+   emp_name = c("Rick","Dan","Michelle","Ryan","Gary"),
+   salary = c(623.3,515.2,611.0,729.0,843.25))
+
+# Examine a data frame
+print(emp.data)
+dim(emp.data)
+str(emp.data)
+
+nrow(emp.data)
+ncol(emp.data)
+
+# Q: Does the last two functions work
+# for matrices? How about for vectors?
+
+# Same methods can be used to access values
+# in a data frame as in a matrix.
+#
+# Data frames also supports the dollar
+# sign operation for value access.
+#
+emp.data$emp_id
+```
+
+Since a matrix and a data frame look very similar, how do you decide between a matrix and a data frame which one to use?
+
+- data characteristics
+- function requirement
+- memory limit
+
+### Lists
+
+A list is a generic vector capable of containing various objects.
+
+```{r, results=F}
+# Create a list
+a <- 1:5
+b <- c('Penn', "State")
+c <- c(T, F, F)
+x <- list(a = a, b = b, c = c)
+
+# Examine a list
+length(x)
+names(x)
+
+# List slicing
+x[2]
+
+# list member reference
+x[[2]]
+
+# Q: Use the function class() to examine the
+# above two expression, what do you find?
+#
+
+# Remove a member
+x[-2]
+```
+
+### Date and Time
+
+Representing dates and times are more complicated than what we have learned so far. Dates and times have their own notations, leap years, time zones, and more. These chracteristics of dates and times make them different from other objects.
+
+R provides three date/time classes which include `Date`, `POSIXct`, and `POSIXlt`. Let's learn how to use them.
+
+```{r, results=F, message=F}
+# If you are only dealing with dates
+one.date <- as.Date('2019-08-29')
+two.dates <- as.Date(c('2019/01/01', '2019/04/01'), format = "%Y/%m/%d")
+week.days <- seq(from = one.date, length.out = 5, by = 'week')
+
+# Examine properties of vectors
+length(one.date)
+weekdays(week.days)
+
+# Operations on Dates
+two.dates - one.date
+difftime(one.date, two.dates, units = 'hours')
+diff(week.days, lag = 2)
+
+# If you are dealing with dates and times
+time.1 <- as.POSIXct('2019-08-29 12:05:00', tz = 'UTC')
+time.2 <- strptime('2019/08/29 12:05', format = '%Y/%m/%d %H:%M')
+
+# Q: Use the function identical() to check
+# whether time.1 and time.2 are the same. Why so?
+#
+
+# Operations on Times
+time.1 - time.2
+time.1 - 4 * 60
+
+# Extract partial information as characters
+format(time.1, format = "%m/%d")
+format(time.2, format = "%Y %Z")
+
+# Extract partial information from POSIXlt
+attributes(time.2)
+time.2$mday
+
+# Extract partial information from POSIXct
+library(lubridate)
+year(time.1)
+wday(time.1, label = T)
+tz(time.2)
+
+# Change time zone
+with_tz(time.2, tzone = 'UTC')
+```
+
+Codes are referenced from [Using Dates and Times in R](https://www.r-bloggers.com/using-dates-and-times-in-r/). [Worldtime Buddy](https://www.worldtimebuddy.com/edt-to-pdt-converter) provides a nice-looking visualization of converting times.
+
+## Attributes
+
+Objects in R can have many properties associated with them, called *attributes*. These properties explain what an object represents and how it should be interpreted. Most of the time, the only difference between two similar objects is that they have difference attributes. Here is a list of functions to examine some common attributes.
+
+- `class`
+- `dim`
+- `length`
+- `names`
+- `ncol`
+- `colnames`
+- `attributes`
