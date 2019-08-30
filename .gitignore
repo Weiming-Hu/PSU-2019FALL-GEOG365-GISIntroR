@@ -38,3 +38,5 @@ rsconnect/
 # Weiming added
 venv
 .Rproj.user
+*.html
+*.pdf
