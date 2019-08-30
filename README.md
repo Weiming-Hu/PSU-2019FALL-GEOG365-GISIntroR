@@ -13,6 +13,7 @@
     * [Install LaTex](#install-latex)
     * [Install GIT](#install-git)
     * [Working with Markdown](#working-with-markdown)
+    * [Upon Running RStudio](#upon-running-rstudio)
 * [Issues](#issues)
 
 <!-- vim-markdown-toc -->
@@ -71,6 +72,12 @@ Most of the materials will be in the format of R Markdown. Essentially, R Markdo
 
 - [Dillinger](https://dillinger.io/) starts with an example for you to play with.
 - [Markdown Editor](https://jbt.github.io/markdown-editor/) starts with a blank document.
+
+### Upon Running RStudio
+
+The **FIRST** thing to do upon RStudio is up and running is to **create a project**! Always make sure you are working in a specific project. This is generally a good practise for programming. Specifically, if you receive the error about `openBinaryFile` when you are trying to compile a particular R Markdown file, this is probably you are not working in a project and RStudio is confused where some intermediate files are.
+
+Personally, I create a project for each task research project I'm currently working on and each course I'm taking. So you can create a project with the name `GEOG365` for this repository.
 
 ## Issues
 
