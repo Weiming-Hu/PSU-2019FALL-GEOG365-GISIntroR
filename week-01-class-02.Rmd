@@ -268,7 +268,7 @@ Representing dates and times are more complicated than what we have learned so f
 
 R provides three date/time classes which include `Date`, `POSIXct`, and `POSIXlt`. Let's learn how to use them.
 
-```{r, results=F, message=F}
+```{r, results=F, message=F, error=T}
 # If you are only dealing with dates
 one.date <- as.Date('2019-08-29')
 two.dates <- as.Date(c('2019/01/01', '2019/04/01'), format = "%Y/%m/%d")
