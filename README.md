@@ -7,6 +7,7 @@
 <!-- vim-markdown-toc GitLab -->
 
 * [Overview](#overview)
+* [Try It Out on Binder](#try-it-out-on-binder)
 * [Setup Instructions](#setup-instructions)
     * [Increase Your Storage Space (For Penn State Students)](#increase-your-storage-space-for-penn-state-students)
     * [Install R and RStudio](#install-r-and-rstudio)
@@ -25,6 +26,8 @@ Welcome to the repository for GEOG 365, Introduction to GIS Programming, during 
 Instructor: [Weiming Hu](https://weiming-hu.github.io/)
 
 Syllabus: [Overleaf](http://bit.ly/geog365)
+
+## Try It Out on Binder
 
 Didn't have your machine already set up? Use a pre-built machine dedicated for this course at [Binder](https://mybinder.org/v2/gh/Weiming-Hu/PSU-2019FALL-GEOG365-GISIntroR/master), or click the `Launch | Binder` badge above. Usually, it takes about 3 minutes to launch a server for you. But, depending on the workload of installing required packages, it can take about 10 minutes if a new image needs to be built. You can first click the badge/link which launches the building process and you can come back after a while to check. **Feel free to experiment with the scripts, changes won't be reflected in this public repository**.  
 
