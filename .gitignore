@@ -40,3 +40,4 @@ venv
 .Rproj.user
 *.html
 *.pdf
+.DS_Store
