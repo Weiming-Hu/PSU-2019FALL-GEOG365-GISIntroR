@@ -23,5 +23,5 @@ R -e "IRkernel::installspec()"
 Convert Rmd to ipynb.
 
 ```
-for file in `ls *.Rmd`; do ipyrmd --t ipynb --from Rmd -o notebooks/`basename $file .Rmd`.ipynb $file -y; done
+for file in `ls *.Rmd`; do ipyrmd --t ipynb --from Rmd -o `basename $file .Rmd`.ipynb $file -y; done
 ```
