@@ -71,6 +71,15 @@ If you are using the lab desktops, you do not have the permission to install pro
 
 Since the course materials are also public on [GitHub](https://github.com/Weiming-Hu/PSU-2019FALL-GEOG365-GISIntroR), instead of downloading the repository every time I make a change to it, you can integrate `GitHub` into `RStudio` by installing [git](https://git-scm.com/). Then you will have the ability to click one button and sync your local directory with the online repository.
 
+To check whether GIT is successfully installed in your system, open a terminal, and following the steps. Remove the dollar sign in the command line. The below output message is generated on a Linux machine. You might get different messages depending on your operation system.
+
+```
+$ git --version
+git version 2.17.1
+```
+
+On Mac OS, if this is your first time installing GIT, you might also need to install Xcode Command Line Tools by running `xcode-select --install`. And then you should be able to run the check command above for GIT.
+
 ### Working with Markdown
 
 Most of the materials will be in the format of R Markdown. Essentially, R Markdown is Markdown plus R code. You can write pure Markdown file and there are plenty of editors for Markdown language. Here are two online editors that are easy to use if you just want to write pure Markdown files. When you type in the left panel, you can see in real-time how the compiled format looks like in the right panel.
