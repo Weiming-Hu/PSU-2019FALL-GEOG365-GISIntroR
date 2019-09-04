@@ -30,6 +30,8 @@ Syllabus: [Overleaf](http://bit.ly/geog365)
 
 ## Try It Out on Binder
 
+**Unfortunately, Binder is not building since MRAN from Microsoft has been unstable for the past several days. I'm actively checking on this**.
+
 Didn't have your machine already set up? Use a pre-built machine dedicated for this course at [Binder](https://mybinder.org/v2/gh/Weiming-Hu/PSU-2019FALL-GEOG365-GISIntroR/master), or click the `Launch | Binder` badge above. Usually, it takes about 3 minutes to launch a server for you. But, depending on the workload of installing required packages, it can take about 10 minutes if a new image needs to be built. You can first click the badge/link which launches the building process and you can come back after a while to check. **Feel free to experiment with the scripts, changes won't be reflected in this public repository**.  
 
 ## Setup Instructions
