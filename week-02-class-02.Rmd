@@ -10,6 +10,7 @@ output: pdf_document
 Below is a summary of the topics covered in this lecture:
 
 - Revisit For Loops
+- Revisit Functions
 - Data Exploration
 	- Summary and Table
 	- Quantile, Range, and Mean
@@ -95,6 +96,50 @@ for (i in seq_len(num.rows)) {
 
 # Q: Can you flatten the for loop and generate the same results?
 # Q: Can you translate the for loop to a while loop?
+```
+
+## Revisit Functions
+
+Similar to the concept of for loops, functions are another way to reduce code redundacy and improve code reusability and readability.
+
+Consider the following situation.
+
+```{r}
+# I have several data objects
+vec <- runif(n = 100, min = 10, max = 100)
+mat <- matrix(data = rnorm(n = 50, mean = 10, sd = 3),
+              nrow = 10)
+
+# I would like to
+# - first center the values;
+# - second normalize the values using the maximum;
+# - third calculate the median of the normalized values.
+# 
+
+# Without functions
+vec.center <- scale(vec, center = T, scale = F)
+print(median(vec.center / max(vec.center)))
+
+mat.center <- scale(mat, center = T, scale = F)
+print(median(mat.center / max(mat.center)))
+
+# With functions
+scaled.median <- function(x) {
+  # Center the values
+  x <- scale(x, center = T, scale = F)
+  
+  # Normalize the values
+  x <- x / max(x)
+  
+  # Calculate the median
+  result <- median(x)
+  
+  # Return the result
+  return(result)
+}
+
+print(scaled.median(vec))
+print(scaled.median(mat))
 ```
 
 ## Data Exploration
