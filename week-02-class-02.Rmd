@@ -198,13 +198,16 @@ ggplot(data = <DATA>) +
 It turns out the measures are actually from three plants with different treatments at different times. The biologist kindly provided us the time records for each observation. Let's try to append the information to our data frame and visualize the addition.
 
 ```{r}
-# Load an R data file. Please notice the added variable
-# in your global environment called 'time.records'.
-# 
-load('assets/plant-growth-time.RData')
+# Read the time records from a CSV file
+time.records <- read.table('assets/plant-growth-time.csv',
+                           sep = ',', stringsAsFactors = F)
 
 # Q: Can you use what we have learned to examine 
 # what we have just loaded?
+# 
+
+# Convert from characters to POSIXct
+time.records <- strptime(time.records$V1, format = '%Y-%m-%d %H:%M:%S')
 
 # Add these records to our data frame
 PlantGrowth <- cbind(PlantGrowth, time.records)
