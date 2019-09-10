@@ -79,7 +79,7 @@ print(vec)
 ### Branching
 
 ```{r, out.width = "300px", fig.align="center", echo=F}
-knitr::include_graphics("figures/branching.jpg")
+knitr::include_graphics("../figures/branching.jpg")
 ```
 
 Branching is an important mechanism in computer programs, and in daily lives, of course. A branch allows you to execute some code if certain conditions are met, and do something else in other cases. 

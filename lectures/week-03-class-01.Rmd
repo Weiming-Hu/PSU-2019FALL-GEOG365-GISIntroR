@@ -30,7 +30,7 @@ Below is a summary of the topics covered in this lecture:
 Most statistical theory focuses on data modeling, prediction and statistical inference while it is usually assumed that data are in the correct state for data analysis. Typically, a data analyst spends a significant portion of the time cleaning the data set prior to the actual analysis.
 
 ```{r, out.width = "200px", fig.align="center", echo=F}
-knitr::include_graphics("figures/value-chain.png")
+knitr::include_graphics("../figures/value-chain.png")
 ```
 
 The above figure, referenced from Edwin deJonge and Mark van der Loo, *An introduction to data cleaning with R*, shows an overview of a typical data analysis project. As the data passes through each step, the **value** of data increases.
@@ -46,7 +46,7 @@ Let's read the data into R first.
 ```{r, results = F}
 # Read a table from the CSV file
 dat <- read.table(
-	file = 'assets/world-population.csv',
+	file = '../assets/world-population.csv',
 	sep = ',', quote = "\"", header = T,
 	stringsAsFactors = F)
 
@@ -78,7 +78,7 @@ summary(dat)
 # be correct. I have prepared the look-up table.
 #
 country.codes <- read.table(
-	'assets/country-codes.csv', sep = ',',
+	'../assets/country-codes.csv', sep = ',',
 	header = T, stringsAsFactors = F)
 
 # For each country code in the population table, we check its

@@ -199,7 +199,7 @@ It turns out the measures are actually from three plants with different treatmen
 
 ```{r}
 # Read the time records from a CSV file
-time.records <- read.table('assets/plant-growth-time.csv',
+time.records <- read.table('../assets/plant-growth-time.csv',
                            sep = ',', stringsAsFactors = F)
 
 # Q: Can you use what we have learned to examine 

@@ -1,0 +1,99 @@
+---
+title: "GEOG 365 Assignment 1"
+author: "Weiming Hu"
+output: pdf_document
+---
+
+## Instructions
+
+This is the Assignment 1 for GEOG 365.
+
+This document contains the questions you will need to answer and the instructions for how to prepare your document for submission. Please read through this document carefully. Please inform the instructor if anything is unclear in this document.
+
+## Prepare Your Submission
+
+**A single PDF document with the questions, the answers, and the codes is required**. Submission with multiple files and/or with different file format is not allowed.
+
+With that said, you can have different ways to prepare the submission. For example,
+
+- You can copy and paste the questions from this document into a new file with your preferred editor, e.g. Microsoft Word. Then, you can prepare your codes in an R script and develop your answers. Once you have successfully run your codes and prepared all your answers, copy the codes, the answers, and the figures, and append them after the corresponding question. Finally, you need to convert your file into a PDF file for submission.
+- You can directly type your codes and answers into this document and compile, or `knit`. You then only need to submit the PDF file. Make sure that the codes, the figures, and the answers are **visible** in the PDF file.
+
+You do not have to either remove or include the instruction section in your file.
+
+*R Markdown users*: Always make sure you can successfully compile this document to start with. If you are having problem with `pdf_document` and `LaTex`, change `pdf_document` to `html_document` and use an [online converter](https://html2pdf.com/) to convert from HTML to PDF. If you still have problems, please inform the instructor.
+
+## Checklist Before Submission
+
+Here is a checklist before your submission:
+
+- A single PDF file
+- *R Markdown users*: Change the author name in the header
+- File name convention `GEOG365_Assignment1_LastName_FirstName.pdf`
+- All questions, answers, codes, and figures are included and visible in the document.
+- Check your code indentation and make sure there is no space overfull issues.
+
+\newpage
+
+## Questions
+
+### Question 1
+
+Suppose we have the following code example.
+
+```{r}
+# Create vectors
+vec1 <- 1:5
+vec2 <- c(1:4, 5.00)
+
+# Print out the values
+print(vec1)
+print(vec2)
+
+identical(vec1, vec2)
+```
+
+Explain why two vectors are not identical. You can find the documentation of a function by 
+prepending `?` to the function name.
+
+I think that's just the way it is.
+
+### Question 2
+
+Convert the following data into a single R data object. Hint: You need to decide which **one** data object to use that is capable of containing all the data entries. Print your data object after creation.
+
+| ID |    Location   | Longitude | Latitude |
+|:--:|:-------------:|:---------:|:--------:|
+| 1  | State College | -77.858   | 40.789   |
+| 2  | Denver        | -104.990  | 39.739   |
+| 3  | New York City | -74.005   | 40.712   |
+
+### Question 3
+
+Suppose we have the following list. You will need to run the following code first before you carry on.
+
+```{r}
+#jkfasjdklfjaksldjflkasjdklfj
+#alsdkjflkasjdflkjasdlkfjlask
+#djflaskdjflkasdjflkasdjflkas
+#djflkasdjflkasdjflkasdjsjaflk
+l <- list(vec = 1:10, mat = matrix(1:10, nrow = 2), name = "A complex list")
+```
+
+What are some attributes of the *list*? Try to identify and print as many attributes as you can (*focus on the attributes we have covered during the class*).
+
+Print the value on the 2nd row and 3rd column of the matrix in the list.
+
+### Question 4
+
+Write a for loop to run the random number generation function `runif()` 100 times, generating 1 number at a time. Keep **all** the numbers that are larger than 0.7 in a new vector and print the results.
+
+### Question 5
+
+Suppose we have the following vector. You will need to run the following code first before you carry on.
+
+```{r}
+vec <- c(1, 3, 5, 6, 2, 10, 1, NA, 9, 9, 4)
+```
+
+Write **ONE** function that returns the **mean**, **median**, **maximum**, and **minimum** of the valid values in the given vector. Then, call the function with the vector and print out the results. Hint: Try to follow the recommended code style.
