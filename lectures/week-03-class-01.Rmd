@@ -65,9 +65,10 @@ Again, we are looking for **suspicious records** that might potentially be mista
 
 ```{r, results = F}
 # Some hints
-str(dat)
-View(dat)
-summary(dat)
+# str(dat)
+# View(dat)
+# summary(dat)
+#
 ```
 
 **Stop** if you have not tried to find suspicious places by yourself.
