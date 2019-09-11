@@ -23,7 +23,7 @@ Below is a summary of the topics covered in this lecture:
 - Data Cleaning
 - Pivot and Flat Tables
 - Basic Visualization
-- [R Coding Standard from Google](https://google.github.io/styleguide/Rguide.html)
+- R Coding Standard from Google[1](https://google.github.io/styleguide/Rguide.html), [2](http://adv-r.had.co.nz/Style.html)
 
 ## Data Cleaning
 
