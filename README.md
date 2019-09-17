@@ -16,6 +16,7 @@
     * [Install GIT](#install-git)
     * [Working with Markdown](#working-with-markdown)
     * [Upon Running RStudio](#upon-running-rstudio)
+    * [Change the Default Package Installation Path](#change-the-default-package-installation-path)
 * [Issues](#issues)
 
 <!-- vim-markdown-toc -->
@@ -93,6 +94,24 @@ Most of the materials will be in the format of R Markdown. Essentially, R Markdo
 The **FIRST** thing to do upon RStudio is up and running is to **create a project**! Always make sure you are working in a specific project. This is generally a good practise for programming. Specifically, if you receive the error about `openBinaryFile` when you are trying to compile a particular R Markdown file, this is probably you are not working in a project and RStudio is confused where some intermediate files are.
 
 Personally, I create a project for each task research project I'm currently working on and each course I'm taking. So you can create a project with the name `GEOG365` for this repository.
+
+### Change the Default Package Installation Path
+
+If your machine does not have enough space during package installation, which can usually be the case if you are using the lab machines, you need to change the default package location.
+
+First you will need to create an empty folder somewhere on your machine that has enough space for package installation. For example, you can create an empty folder under the `X:/` drive. You can name it `Rlibs`.
+
+Then, inside R, you need to run the following command.
+
+```
+.libPaths(new = c(.libPaths(), 'X:/Rlibs'))
+```
+
+By running the above command, you appended the customized path into the default location list so that R will install and look for packages into the new location if needed. **You will need to run this command every time when you open R** so that R can successfully find the packages installed in the customized location.
+
+After the above command, you can run `.libPaths()` to check whether the new path has been added.
+
+Now you should be able to install packages.
 
 ## Issues
 
