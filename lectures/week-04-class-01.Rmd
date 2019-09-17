@@ -1,0 +1,179 @@
+---
+title: "Spatial Data Objects"
+author: "Weiming Hu"
+date: "September 17, 2019"
+output: pdf_document
+---
+
+## Topics
+
+Below is a summary of the topics covered in this lecture:
+
+- Spatial Data Representation Overview
+- Coordinate Reference System Introduction
+- Vector Data
+	- SpatialPoints
+	- SpatialLines
+	- SpatialPolygons
+
+```{r include = F}
+# Make sure you have the following packages installed. They are required for
+# subsequent lectures. If you have problems installing the packages,
+# you can use Binder for now and try to figure this out or ask for help.
+#
+# install.packages('NameOfPackage') 
+#
+library(sf)
+library(sp)
+library(maps)
+library(raster)
+library(spData)
+library(spDataLarge)
+```
+
+## Geographic Data Models
+
+### Feature
+
+Geographic data models are designed to describe objects in the real world, or **feaures**. But what is a feature?
+
+A feature is thought of as a thing, or an object in the real world, such as a building or a tree. As is the case with objects, they often consist of other objects. This is the case with features too: a set of features can form a single feature. A forest stand can be a feature, a forest can be a feature, a city can be a feature. A satellite image pixel can be a feature, a complete image can be a feature too.
+
+Features have a **geometry** describing where on Earth the feature is located, and they have **attributes**, which describe other properties. The geometry of a tree can be the delineation of its crown, of its stem, or the point indicating its centre. Other properties may include its height, color, diameter at breast height at a particular date, and so on.
+
+All geometries are composed of points. Points are coordinates in a 2-, 3- or 4-dimensional space. All points in a geometry have the same dimensionality. In addition to X and Y coordinates, there are two optional additional dimensions:
+
+- a Z coordinate, denoting altitude
+- an M coordinate (rarely used), denoting some measure that is associated with the point, rather than with the feature as a whole (in which case it would be a feature attribute); examples could be time of measurement, or measurement error of the coordinates
+
+Therefore, the four possible cases then are:
+
+- two-dimensional points refer to x and y, easting and northing, or longitude and latitude, we refer to them as XY
+- three-dimensional points as XYZ
+- three-dimensional points as XYM
+- four-dimensional points as XYZM (the third axis is Z, fourth M)
+
+## Implementation
+
+There are two fundamental geographic data models: **vectors** and **rasters**. In this lecture, we are going to introduce the theory and the implementation behind each data model, and the disciplines in which they predominate.
+
+- Vector data model: It represents the world using points, lines and polygons. These have discrete, well-defined borders, meaning that vector datasets usually have a high level of precision.
+- Raster data model: It divides the surface up into cells of constant size. Raster datasets are the basis of background images used in web-mapping and have been a vital source of geographic data since the origins of aerial photography and satellite-based remote sensing devices. Rasters aggregate spatially specific features to a given resolution, meaning that they are consistent over space and scalable.
+
+The most commonly used papckage is probably `sp`. Note that this package will eventually be replaced by the newer `sf` package. In this lecture, we start with the `sp` package.
+
+### SpatialPoints
+
+In the example below, we make a very simple map. Note that a map is special type of plot (like a scatter plot, barplot, etc.). A map is a plot of geospatial data that also has labels and other graphical objects such as a scale bar or legend. The spatial data itself should not be referred to as a map.
+
+```{r}
+name <- LETTERS[1:10]
+
+longitude <- c(-116.7, -120.4, -116.7, -113.5, -115.5,
+               -120.8, -119.5, -113.7, -113.7, -110.7)
+latitude <- c(45.3, 42.6, 38.9, 42.1, 35.7, 38.9,
+              36.2, 39, 41.6, 36.9)
+
+stations <- cbind(longitude, latitude)
+
+# Simulated rainfall data
+precip <- round((runif(length(latitude))*10)^3)
+```
+
+A map of point locations is not that different from a basic x-y scatter plot. Here I make a plot (a map in this case) that shows the location of the weather stations, and the size of the dots is proportional to the amount of precipitation. The point size is set with argument `cex`.
+
+```{r}
+psize <- 1 + precip/500
+plot(stations, cex = psize, pch = 20, col = 'red', main = 'Precipitation')
+# add names to plot
+text(stations, name, pos = 4)
+# add a legend
+breaks <- c(100, 250, 500, 1000)
+legend.psize <- 1 + breaks / 500
+legend("topright", legend = breaks, pch = 20, pt.cex = legend.psize, col = 'red', bg = 'gray')
+
+# Q: What if the geometry and the attribute information in this map?
+```
+
+Note that the data are represented by *longitude, latitude*, in that order, do not use *latitude, longitude* because on most maps latitude (North/South) is used for the vertical (Y) axis and longitude (East/West) for the horizontal (X) axis. This is important to keep in mind, as **it is a very common source of mistakes**!
+
+We can add multiple sets of points to the plot, and even draw lines and polygons.
+
+```{r}
+lon <- c(-116.8, -114.2, -112.9, -111.9, -114.2, -115.4, -117.7)
+lat <- c(41.3, 42.9, 42.4, 39.8, 37.6, 38.3, 37.6)
+x <- cbind(lon, lat)
+plot(stations, main = 'Precipitation')
+polygon(x, col = 'blue', border = 'light blue')
+lines(stations, lwd = 3, col = 'red')
+points(x, cex = 2, pch = 20)
+points(stations, cex = psize, pch = 20, col = 'red', main = 'Precipitation')
+```
+
+The above example is not trivial and problems can easily get more complicated. It is possible to create spatial maps from scratch but limitation appears very soon when 1) large data set presents, 2) different data types are involved, and 3) spatial operations need to be carried out. It is better to use predefined classes to describe features.
+
+```{r, results = F}
+coords <- cbind(longitude, latitude)
+pts <- SpatialPoints(coords)
+
+# Different ways to examine the object
+pts
+class(pts)
+showDefault(pts)
+```
+
+So we see that the object has the coordinates we supplied, but also a bbox. This is a *bounding box*, or the *spatial extent* that was computed from the coordinates. There is also a *proj4string*. This stores the Coordinate Reference System (*CRS*). We did not provide the CRS so it is unknown. That is not good, so let’s recreate the object, and now provide a CRS.
+
+```{r}
+crs <- CRS('+proj=longlat +datum=WGS84')
+pts <- SpatialPoints(coords, proj4string = crs)
+```
+
+We can then use the *SpatialPoints* object to create a *SpatialPointsDataFrame* object.
+
+```{r}
+# We first need a data frame. The ID variable is mandatory.
+df <- data.frame(ID = 1:length(precip), precip = precip)
+
+# Combine the SpatialPoints with the data.frame
+ptsdf <- SpatialPointsDataFrame(pts, data=df)
+
+# Q: Use some functions we have already learned to examine the 
+# content of the spatial points data frame.
+# 
+```
+
+Now, visualization just got easier.
+
+```{r}
+spplot(ptsdf, zcol = 'precip')
+```
+
+### SpatialLines and SpatialPolygons
+
+Making a *SpatialPoints* object was easy. Making a *SpatialLines* and *SpatialPolygons* object is a bit harder, but still should be straightforward.
+
+```{r}
+# Note that this function is defined in raster rather than sp.
+spl <- spLines(coords, crs = crs)
+spp <- spPolygons(coords, crs = crs)
+
+# Q: Try to run the command str(spp) and attributes(spp)
+```
+
+We can then make use of `plot` to make a map.
+
+```{r}
+plot(spp, axes = T, las = 1)
+plot(spp, border = 'blue', col = 'yellow', lwd = 3, add = T)
+points(pts, col='red', pch=20, cex=3)
+
+# Overlap a state boundary map
+map('state', add = T)
+
+# Q: What do you think happens to the polygon?
+# Q: Can you fix it to be a concex polygon?
+# Q: Can you create a SpatialPolygonsDataFrame from SpatialPolygons?
+# 
+```
+
