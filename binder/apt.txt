@@ -7,3 +7,4 @@ dvipng
 ghostscript
 lmodern
 libudunits2-dev
+libgdal-dev
