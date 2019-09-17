@@ -6,3 +6,4 @@ texlive-fonts-recommended
 dvipng
 ghostscript
 lmodern
+libudunits2-dev
