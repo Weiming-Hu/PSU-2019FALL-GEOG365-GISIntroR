@@ -172,8 +172,36 @@ points(pts, col='red', pch=20, cex=3)
 map('state', add = T)
 
 # Q: What do you think happens to the polygon?
-# Q: Can you fix it to be a concex polygon?
+# Q: Can you fix it to be a convex polygon?
 # Q: Can you create a SpatialPolygonsDataFrame from SpatialPolygons?
 # 
 ```
+The following codes show how to reorder the points to define a convex polygon.
 
+
+```{r}
+# Plot figures side by side
+par(mfrow = c(1, 2))
+
+# This is the previous figure
+plot(spp, axes = T, las = 1)
+plot(spp, border = 'blue', col = 'yellow', lwd = 3, add = T)
+points(pts, col='red', pch=20, cex=3)
+map('state', add = T)
+
+# Add the ID on top of each point
+text(coords[, 1], coords[, 2], 1:10)
+
+# Reorder the rows
+new.order <- c(1, 2, 6, 7, 3, 5, 8, 10, 9, 4)
+coords <- coords[new.order, ]
+
+# Regenerate the polygon
+spp <- spPolygons(coords, crs = crs)
+
+# Replot the figure
+plot(spp, axes = T, las = 1)
+plot(spp, border = 'blue', col = 'yellow', lwd = 3, add = T)
+points(pts, col='red', pch=20, cex=3)
+map('state', add = T)
+```
