@@ -218,7 +218,7 @@ Use `ggmap::register_google()` to check the instructions for setting up the API 
 
 Now that we have learned both rasters and vectors, let's try to visualize them together. We are still going to look at the Zion National Park.
 
-```{r, out.width = "400px", fig.asp = 0.6}
+```{r, out.width = "400px", fig.asp = 0.6, results = F}
 # The dataset containing randomly
 # located points in the Zion National Park
 # 
@@ -244,6 +244,27 @@ vals <- extract(rast.srtm, zion.pts)
 
 # Barplot
 barplot(names.arg = 1:length(zion.pts), height = vals)
+
+# We can also add attributes to SpatialPoints to make 
+# SpatialPointsDataFrame.
+# 
+zion.spdf <- SpatialPointsDataFrame(
+  coords = coordinates(zion.pts),
+  data = data.frame(ID = 1:length(zion.pts),
+                    Elevation = vals),
+  proj4string = crs(zion.pts))
+
+# SpatialPointsDataFrame can be thought as
+# the points plus their attributes
+# 
+# To access the attribute table
+zion.spdf@data
+
+# To access the coordinates
+zion.spdf@coords
+
+# Check all available slot names
+slotNames(zion.spdf)
 ```
 
 If we have extra time, please try to reflect on and complete the following questions:
