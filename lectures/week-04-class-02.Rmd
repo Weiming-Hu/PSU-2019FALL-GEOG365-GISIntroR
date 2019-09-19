@@ -191,7 +191,7 @@ map <- get_map(location = bbox)
 # Generate plot using Google map
 # register_google(key = '<Your API Key>')
 # map <- get_map(location = rowMeans(bbox),
-#                maptype = 'roadma')
+#                maptype = 'roadmap')
 
 p <- ggmap(map) +
   geom_raster(
