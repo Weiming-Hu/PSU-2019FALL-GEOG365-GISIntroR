@@ -4,6 +4,7 @@ install.packages("rmarkdown")
 install.packages("bitops")
 install.packages("numbers")
 install.packages("caTools")
+install.packages("magrittr")
 install.packages("rprojroot")
 install.packages("lubridate")
 
@@ -15,8 +16,9 @@ install.packages("https://cran.r-project.org/src/contrib/Archive/cowplot/cowplot
 
 install.packages("sf")
 install.packages("sp")
+install.packages("maps")
+install.packages('rgdal')
 install.packages("raster")
 install.packages("spData")
 install.packages("devtools")
-install.packages("maps")
 devtools::install_github("Nowosad/spDataLarge")

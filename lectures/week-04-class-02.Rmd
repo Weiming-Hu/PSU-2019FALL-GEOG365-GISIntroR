@@ -6,11 +6,14 @@ output: pdf_document
 ---
 
 ```{r env-preparation, include = F}
+library(sf)
 library(maps)
 library(ggmap)
+library(rgdal)
 library(raster)
 library(ggplot2)
 library(ggthemes)
+library(magrittr)
 library(spDataLarge)
 
 knitr::opts_chunk$set(fig.align = "center")
@@ -22,7 +25,7 @@ Below is a summary of the topics covered in this lecture:
 
 - Raster Data
 - File Reading and Writing
-- Coordinate Reference System
+- Piping Mechanism
 - Spatial Data Visualization
 	- Static
 	- Animated
@@ -108,10 +111,66 @@ writeRaster(ras.srtm, format = 'GTiff',
             filename = output.file)
 ```
 
-You can then open the TIF image in other GIS software for further analysis and visualization if you prefer. For example, I use [QGIS](https://www.qgis.org/en/site/) to generate the following figure which overlays the TIF image on top of [Open Street Map](https://www.openstreetmap.org/).
+You can then open the TIF image in other GIS software for further analysis and visualization if you prefer. For example, I use [QGIS](https://www.qgis.org/en/site/) to generate the following figure which overlays the TIF image on top of [Open Street Map](https://www.openstreetmap.org/). Later on, we will learn how to generate a similar figure within R.
 
 ```{r, out.width = "300px", echo=F}
 knitr::include_graphics("../figures/raster-qgis.png")
+```
+
+Working with rasters is similar to working with matrices.
+
+```{r, results = F, out.width = "800px", fig.asp = 0.4}
+# Access values in a raster by index
+rast.srtm[1]
+rast.srtm[1, 1]
+
+rast.srtm[466:470]
+rast.srtm[2, 1:5]
+
+# Get all values in a raster
+values(rast.srtm)
+
+# Modify values in a raster by index
+rast.srtm[1, ] <- NA
+
+# Modify values in a raster by bounding box
+sp.bbox <- c(-0.5, 0.5, -0.5, 0.5) %>%
+  extent() %>% as('SpatialPolygons')
+proj4string(sp.bbox) <- crs(rast2)
+
+# Create a new raster with the NA values
+rast2.hole <- rasterize(sp.bbox, rast2, update = TRUE)
+
+# We can then try to plot the figures side by side
+par(mfrow = c(1, 3), mar = c(4, 2, 1, 4))
+plot(rast2, legend = F)
+plot(sp.bbox, add = T,
+     border = 'red')
+
+plot(rast2, legend = F, yaxt = 'n')
+plot(sp.bbox, add = T,
+     col = 'white',
+     border = NA)
+
+plot(rast2.hole)
+```
+
+If you would like to plot the figure to a file, you can use the following code:
+
+```{r, eval = F}
+# Initialize a device for plotting
+png(filename = 'raster-hole.png', width = 800, height = 480)
+
+###############################
+# Your plotting codes go here #
+###############################
+
+# Turn off the device to complete the file creation
+dev.off()
+
+# Q: Try to make mores plots without turning off the device,
+# what would happen?
+# 
 ```
 
 ## Visualization
@@ -157,3 +216,39 @@ Use `ggmap::register_google()` to check the instructions for setting up the API 
 
 ### Rasters and Vectors
 
+Now that we have learned both rasters and vectors, let's try to visualize them together. We are still going to look at the Zion National Park.
+
+```{r, out.width = "400px", fig.asp = 0.6}
+# The dataset containing randomly
+# located points in the Zion National Park
+# 
+zion.sfpts <- st_geometry(zion_points)[1:10]
+
+# Define 1 row and 2 columns
+par(mfrow = c(1, 2))
+
+# Plot the base elevation map
+plot(rast.srtm)
+
+# Plot the random points with ID
+plot(zion.sfpts, add = T, pch = 1, cex = 2)
+text(st_coordinates(zion.sfpts),
+     label = 1:length(zion.sfpts),
+     cex = 0.7)
+
+# Convert sf to sp
+zion.pts <- as_Spatial(zion.sfpts)
+
+# Extract values
+vals <- extract(rast.srtm, zion.pts)
+
+# Barplot
+barplot(names.arg = 1:length(zion.pts), height = vals)
+```
+
+If we have extra time, please try to reflect on and complete the following questions:
+
+- Do you prefer the ink-on-paper style or the grammar of graphic style?
+- Can you reproduce the above figures using `ggplot2`?
+- Can you select an area on the map and plot it?
+- Choose a different set of points and visualize their elevation. Try to make the elevation from high to low. *Hint: Use click() to get the coordinates from a raster.*

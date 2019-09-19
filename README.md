@@ -17,6 +17,7 @@
     * [Working with Markdown](#working-with-markdown)
     * [Upon Running RStudio](#upon-running-rstudio)
     * [Change the Default Package Installation Path for R](#change-the-default-package-installation-path-for-r)
+* [R Markdown to R Scripts](#r-markdown-to-r-scripts)
 * [Issues](#issues)
 
 <!-- vim-markdown-toc -->
@@ -112,6 +113,14 @@ By running the above command, you appended the customized path into the default 
 After the above command, you can run `.libPaths()` to check whether the new path has been added.
 
 Now you should be able to install packages.
+
+## R Markdown to R Scripts
+
+If you prefer an R script rather than an Rmd file, you can use the following function to stripe all the writing in an Rmd file and automatically convert it to an R script.
+
+```
+knitr::purl(input = 'lectures/week-04-class-02.Rmd', output = 'lectures/week-04-class-02.R')
+```
 
 ## Issues
 
