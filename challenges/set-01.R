@@ -11,7 +11,7 @@
 # 
 # You will be able to see other people's code if there
 # are any. I recommand try this out by yourself before
-# you see somebody elses' solutions.
+# you other people's solutions.
 # 
 
 ###########################################################
