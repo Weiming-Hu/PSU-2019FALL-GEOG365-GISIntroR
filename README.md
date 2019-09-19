@@ -16,7 +16,7 @@
     * [Install GIT](#install-git)
     * [Working with Markdown](#working-with-markdown)
     * [Upon Running RStudio](#upon-running-rstudio)
-    * [Change the Default Package Installation Path](#change-the-default-package-installation-path)
+    * [Change the Default Package Installation Path for R](#change-the-default-package-installation-path-for-r)
 * [Issues](#issues)
 
 <!-- vim-markdown-toc -->
@@ -95,7 +95,7 @@ The **FIRST** thing to do upon RStudio is up and running is to **create a projec
 
 Personally, I create a project for each task research project I'm currently working on and each course I'm taking. So you can create a project with the name `GEOG365` for this repository.
 
-### Change the Default Package Installation Path
+### Change the Default Package Installation Path for R
 
 If your machine does not have enough space during package installation, which can usually be the case if you are using the lab machines, you need to change the default package location.
 
