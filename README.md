@@ -43,7 +43,7 @@ Didn't have your machine already set up? Use a pre-built machine dedicated for t
 - `exams` contains exam files and rubics.
 - `figures` contains figure files required by lecture files.
 - `lectures` contains lecture files.
-- `challenges` contains R scripts with questions and challenges.
+- `exercises` contains R scripts with questions and exercises.
 
 ## Setup Instructions
 

@@ -1,4 +1,4 @@
-# Description: This is the GEOG 365 weekly challenge set 1
+# Description: This is the GEOG 365 weekly exercise set 1
 # 
 # Instructor: Weiming Hu
 # 
