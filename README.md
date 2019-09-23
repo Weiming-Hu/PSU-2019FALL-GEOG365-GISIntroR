@@ -63,7 +63,7 @@ You should be able to install more packages on lab desktops now. But again, keep
 
 ### Install R and RStudio
 
-**You do not need to install R and RStudio on lab desktops because they are already installed**. If you are using your own machines and this is your first time working with R, probably you need to install R and RStudio.
+**You do not need to install R and RStudio on lab desktops because they are already installed**. If you are using your own machines and this is your first time working with R, probably you need to first install [R](https://www.r-project.org/) and then [RStudio](https://www.rstudio.com/).
 
 Depending on your operation system, you have different steps to install them. `Google` generally gives you a good solution for the installation. If you have problems installing, please come and find me.
 
