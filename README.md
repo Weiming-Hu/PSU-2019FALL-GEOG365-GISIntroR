@@ -116,7 +116,7 @@ First you will need to create an empty folder somewhere on your machine that has
 Then, inside R, you need to run the following command.
 
 ```
-.libPaths(new = c(.libPaths(), 'X:/Rlibs'))
+.libPaths(new = c('X:/Rlibs', .libPaths()))
 ```
 
 By running the above command, you appended the customized path into the default location list so that R will install and look for packages into the new location if needed. **You will need to run this command every time when you open R** so that R can successfully find the packages installed in the customized location.
