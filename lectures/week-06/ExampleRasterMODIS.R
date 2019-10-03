@@ -17,37 +17,37 @@ library(raster)
 # https://neo.sci.gsfc.nasa.gov/view.php?datasetId=MOD_NDVI_M&year=2017
 
 
-url = "MOD_NDVI_M_2017-08-01_rgb_1440x720.TIFF"
+url <- "MOD_NDVI_M_2017-08-01_rgb_1440x720.TIFF"
 
 
 # Read the data
-ndvi = raster(url)
+ndvi <- raster(url)
 
 # Set the value for water (255) equal to NA
-w255 = values(ndvi) == 255
-values(ndvi)[w255] = NA
+w255 <- values(ndvi) == 255
+values(ndvi)[w255] <- NA
 
 
 # Define the NDVI as specified by the instructions
-ndvitrue = (ndvi/255)-0.1
+ndvitrue = (ndvi / 255)-0.1
 
 # Plot the data
-plot(ndvitrue,col=grey.colors(100))
+plot(ndvitrue,col = grey.colors(100))
 
 
 # Define a rectangle encompassing CONUS
 #
 ext = drawExtent()
-plot(ndvitrue,col=grey.colors(100),ext=ext)
+plot(ndvitrue, col = grey.colors(100), ext = ext)
 
 # Crop just the USA
-ndviusa = crop( ndvitrue, ext)
+ndviusa = crop(ndvitrue, ext)
 
 # define a new colorscale
 colors = colorRampPalette(c("#ECE0D7","#0B2403"))
 
 # Plot the NDVI for the USA using a greenscale
-plot(ndviusa,col=colors(100))
+plot(ndviusa, col = colors(100))
 
 # Define a new extent and plot it transparent
 ext2 = drawExtent()
@@ -56,9 +56,15 @@ ext2 = drawExtent()
 p <- as(ext2, 'SpatialPolygons')
 
 # Plot it
-plot(p,add=T,col="#FF000022")
-
+plot(p, add = T, col = "#FF000022")
 
 # Plot a histogram for the values
 hist(ndviusa)
 
+crs <- CRS('+proj=lcc +lat_1=37.96666666666667 +lat_2=38.96666666666667
+           +lat_0=37.5 +lon_0=-84.25 +x_0=500000.0001016001 +y_0=0
+           +ellps=GRS80 +datum=NAD83 +to_meter=0.3048006096012192 +no_defs ')
+
+# Can you trasnform 
+ndviusa.proj <- projectRaster(ndviusa, crs = crs)
+plot(ndviusa.proj, col = colors(100))

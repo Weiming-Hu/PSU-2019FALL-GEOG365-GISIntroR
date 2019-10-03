@@ -1,0 +1,115 @@
+---
+title: "Understanding Factors in R"
+author: "Weiming Hu"
+date: "October 3, 2019"
+output: pdf_document
+---
+
+## Introduction
+
+Today we are going to talk more about factors.
+
+Factors are the data objects which are used to **categorize** the data and store it as **levels**. They are useful in the columns which have a limited number of unique values. Like "Male, "Female" and True, False etc. They are useful in data analysis for statistical modeling.
+
+Factors are stored as **integers**, and have labels associated with these unique integers. While factors look (and often behave) like character vectors, they are actually integers under the hood, and you need to be careful when treating them like strings.
+
+You are likely to encounter factors in following scenarios:
+
+- Reading tables from files. We have seen this multiple times. The argument `stringAsFactors` could come in handy to modify this behavior.
+- Plotting. `ggplot` needs categorical variables to create groups. But sometimes it automatically convert non-factors to factors so that you might not be aware of what's happening under the hood.
+- ...
+
+## Examples
+
+```{r, error = T}
+# Suppose we have the following vector
+data <- c("East", "West", "East", "North", "North", "East",
+          "West", "West", "West", "East", "North")
+
+# This is a character vector, not a factor
+print(is.factor(data))
+print(is.character(data))
+
+# Apply the factor function
+data.factor <- factor(data)
+
+# Let's check again
+print(is.factor(data.factor))
+print(is.character(data.factor))
+
+# R says the new vector is not a character although it looks
+# like one if we print it.
+# 
+print(data.factor)
+print(data)
+
+# Be careful with this.
+
+# Factors have the label component, which is also referred to
+# as level. Levels are the unique values in factors.
+# 
+levels <- levels(data.factor)
+print(levels)
+
+# Factors look like characters. It is easy to convert
+# them to characters.
+data.character <- as.character(data.factor)
+
+identical(data.character, data)
+
+# We can provide with our own labels and change the levels
+# as long as the length is not smaller then the original length.
+# Let's change them to degrees.
+# 
+levels(data.factor) <- c(90, 0, 270) 
+print(data.factor)
+
+# This will not work, because ...?
+levels(data.factor) <- c(90, 0)
+```
+
+## The Myth of Changed Values
+
+Conversion from factors to other types can be tricky. Let's consider the following case.
+
+``` {r}
+# Create a factor with numbers
+v.factor <- factor(c(9, 8, 10, 8, 9))
+```
+
+After the creation, internally, R builds something a matching between values and labels. Click **[here](https://www.dummies.com/wp-content/uploads/325967.image0.jpg)** to see a graph representation. The values we provided became labels and internally R store a new sequence of integers.
+
+```{r}
+# Convert them to numeric as we normally would do
+v.numeric <- as.numeric(v.factor)
+
+# Let's print them.
+print(v.factor)
+print(v.numeric)
+
+# Values have changed!
+# 
+# Do you remember that factors are internally stored as 
+# integers? When we use as.numeric on a factor, we are
+# extracting the internally stored labels of each values.
+# 
+# So to properly do the conversion, here is a solution
+#
+v.numeric <- as.numeric(as.character(v.factor))
+print(v.numeric)
+
+# If you do not like this nested function calls,
+# remember the piping mechanism?
+# 
+library(magrittr)
+v.numeric <- v.factor %>% as.character() %>% as.numeric()
+print(v.numeric)
+```
+
+## Reference
+
+- [Understanding Factors](https://monashbioinformaticsplatform.github.io/2015-09-28-rbioinformatics-intro-r/01-supp-factors.html)
+- [Factors in R](http://www.datasciencemadesimple.com/factors-in-r/)
+- [R Factors](https://www.datamentor.io/r-programming/factor/)
+- [R - Factors](https://www.tutorialspoint.com/r/r_factors.htm)
+- [How to Convert a Factor in R](https://www.dummies.com/programming/r/how-to-convert-a-factor-in-r/)
