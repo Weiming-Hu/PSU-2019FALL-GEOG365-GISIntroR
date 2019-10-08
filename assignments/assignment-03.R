@@ -11,6 +11,12 @@
 # Keep in mind the good practices for writing readable code!
 #
 
+library(sp)
+library(rgdal)
+library(rgeos)
+library(raster)
+library(ggplot2)
+
 # 1. Use the following website to get the coordinates for
 # at least 10 locations that you have been within the continental US.
 # 
@@ -37,8 +43,7 @@
 # Your code here #
 ##################
 
-# 2. Load the library 'sp' and convert the data frame you just created to a
-# SpatialPointsDataFrame.
+# 2. Convert the data frame you just created to a SpatialPointsDataFrame.
 # 
 # Use the length function to show how many spatial objects are included in
 # the SpatialPointsDataFrame you just created.
